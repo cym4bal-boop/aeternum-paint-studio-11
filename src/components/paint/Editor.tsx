@@ -2160,7 +2160,7 @@ export function Editor({ artwork, onExit, onSaved }: { artwork: Artwork; onExit:
             const el = e.currentTarget as HTMLElement;
             const move = (ev: PointerEvent) => {
               const dx = ev.clientX - startX;
-              if (!moved && Math.abs(dx) > 6) { moved = true; setDropSliding(true); }
+              if (!moved && Math.abs(dx) > 6) { moved = true; }
               if (!moved) return;
               const t = Math.max(0, Math.min(100, Math.round(startT + dx / 3)));
               if (t !== drop.threshold) redoDrop(t);
