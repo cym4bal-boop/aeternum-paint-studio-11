@@ -295,7 +295,6 @@ export function Editor({ artwork, onExit, onSaved }: { artwork: Artwork; onExit:
   const [adjust, setAdjust] = useState<null | { name: string; value: number; base: HTMLCanvasElement; layerId: string }>(null);
   const [liq, setLiq] = useStored<LiqSettings>('pp.liq', LIQ_DEFAULT);
   const [dropThreshold, setDropThreshold] = useStored('pp.dropThreshold', 34);
-  const [dropSliding, setDropSliding] = useState(false);
   const [clipMenu, setClipMenu] = useState(false); // three-finger swipe down: cut / copy / paste
   const [tf, setTfState] = useState<Tf>({ tx: 0, ty: 0, scale: 1, rot: 0, fx: 1, fy: 1 });
   const [tfMode, setTfMode] = useState<'Freeform' | 'Uniform'>('Uniform');
@@ -2178,13 +2177,7 @@ export function Editor({ artwork, onExit, onSaved }: { artwork: Artwork; onExit:
             el.addEventListener('pointerup', up);
           }}
         >
-          {dropSliding && (
-            <div className="pp-drop-threshold" role="slider" aria-label="ColorDrop Threshold" aria-valuenow={drop.threshold} aria-valuemin={0} aria-valuemax={100}>
-              <div className="pp-drop-fill" style={{ width: `${drop.threshold}%` }} />
-              <span>ColorDrop Threshold</span>
-              <b>{drop.threshold}%</b>
-            </div>
-          )}
+          {/* threshold bar removed — slide still adjusts invisibly */}
         </div>
       )}
       {!hideUI && drop && (
