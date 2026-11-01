@@ -94,7 +94,7 @@ export const DEFAULT_PREFS: Prefs = {
   showLayerChanges: true,
   edgeDetect: true,
   savePrompt: false,
-  historyLimit: 60,
+  historyLimit: 10000,
   timelapse: true,
   videoQuality: '720p',
   volumeKeys: 'nothing',

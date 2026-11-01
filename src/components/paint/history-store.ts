@@ -12,8 +12,10 @@ type StoredPixels = { id: string; rect: Rect; blob: Blob };
 type StoredEntry = { metas: LayerMeta[]; activeId: string; bg: string; bgVisible: boolean; pixels: StoredPixels[] };
 type StoredHistory = { id: string; undo: StoredEntry[]; redo: StoredEntry[] };
 
-const MAX_UNDO = 25;
-const MAX_REDO = 12;
+/** Undo depth the user asked for: 10000 steps, kept per canvas and never cleared. */
+export const HISTORY_LIMIT = 10000;
+const MAX_UNDO = HISTORY_LIMIT;
+const MAX_REDO = HISTORY_LIMIT;
 
 async function packEntry(e: HistEntry): Promise<StoredEntry> {
   const pixels: StoredPixels[] = [];

@@ -28,10 +28,19 @@ export function EraserGlyph({ size = 24, className }: P) {
 }
 
 export function LayersGlyph({ size = 24, className }: P) {
+  const id = `layers-cut-${useId().replace(/[^a-zA-Z0-9-]/g, '')}`;
+  /* Front box erases the area it covers — plus a thin gap — out of the back box,
+     so the two layers read as separate sheets with no outline. */
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none" aria-hidden>
-      <rect x="8.2" y="2.8" width="13" height="13" rx="3.2" fill="currentColor" />
-      <rect x="2.8" y="8.2" width="13" height="13" rx="3.2" fill="currentColor" stroke="var(--glyph-cut, #d6d6d6)" strokeWidth="2.2" />
+      <defs>
+        <mask id={id} maskUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="24" height="24" fill="#fff" />
+          <rect x="1.6" y="7" width="15.4" height="15.4" rx="4.3" fill="#000" />
+        </mask>
+      </defs>
+      <rect x="8.2" y="2.8" width="13" height="13" rx="3.2" fill="currentColor" mask={`url(#${id})`} />
+      <rect x="2.8" y="8.2" width="13" height="13" rx="3.2" fill="currentColor" />
     </svg>
   );
 }
