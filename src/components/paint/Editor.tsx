@@ -374,9 +374,11 @@ export function Editor({ artwork, onExit, onSaved }: { artwork: Artwork; onExit:
       fitView();
       const ss = artwork.selection;
       if (ss?.outlines?.[0]?.length) { const sel = buildSelection(ss.outlines[0], ss.inverted); if (sel) setSelection(sel); }
-      // undo/redo history survives leaving the canvas
+      // undo/redo history survives leaving the canvas; never wipe stacks the user
+      // already started building while the async load was in flight
       void loadHistory(artwork.id).then((h) => {
         if (!h || cancelled) return;
+        if (undoStack.current.length > 0 || redoStack.current.length > 0) return;
         undoStack.current = h.undo;
         redoStack.current = h.redo;
         setHistoryInfo({ undo: h.undo.length, redo: h.redo.length });

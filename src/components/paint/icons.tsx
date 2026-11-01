@@ -1,4 +1,6 @@
 // Hand-drawn SF-Symbols-style glyphs used by the toolbar so it matches the reference UI.
+import { useId } from 'react';
+
 type P = { size?: number; className?: string };
 
 export function BrushGlyph({ size = 22, className }: P) {

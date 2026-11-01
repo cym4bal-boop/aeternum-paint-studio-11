@@ -585,7 +585,7 @@ function SettingsSheet({ onClose, dark, onDark, accent, onAccent, frost, onFrost
         </PrefSection>
         <PrefSection label="Saving">
           <PrefToggle label="Save changes prompt" on={prefs.savePrompt} onChange={(v) => set({ savePrompt: v })} />
-          <PrefSlider label="History" value={prefs.historyLimit} min={5} max={100} onChange={(v) => set({ historyLimit: v })} />
+          <PrefSlider label="History" value={prefs.historyLimit} min={10} max={10000} onChange={(v) => set({ historyLimit: v })} />
         </PrefSection>
         <ResetButton onReset={() => setPrefs(resetPrefs(['doubleTap', 'longPress', 'timelapse', 'videoQuality', 'volumeKeys', 'disableBack', 'savePrompt', 'historyLimit', 'language']))} />
         <p className="pp-hint">Saved on this device. Canvas settings (color mode, brush behaviour, rendering) live inside a canvas under Actions → Settings.</p>
